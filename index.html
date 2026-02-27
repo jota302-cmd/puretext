@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/svg+xml"
-        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2310b981' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 7V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7'/%3E%3Cpath d='M9 10h6'/%3E%3Cpath d='M9 14h6'/%3E%3Cpath d='M9 18h3'/%3E%3Cpath d='M4 7l8-3 8 3'/%3E%3C/svg%3E">
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2306B6D4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 7V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7'/%3E%3Cpath d='M9 10h6'/%3E%3Cpath d='M9 14h6'/%3E%3Cpath d='M9 18h3'/%3E%3Cpath d='M4 7l8-3 8 3'/%3E%3C/svg%3E">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8167884438770174"
         crossorigin="anonymous"></script>
     <title data-i18n="head_title">PureText | AI Text Cleaner</title>
@@ -23,7 +23,7 @@
                     colors: {
                         brand: {
                             black: '#000000',
-                            emerald: '#10b981',
+                            cyan: '#06B6D4',
                         }
                     },
                     fontFamily: {
@@ -34,8 +34,13 @@
         }
     </script>
     <style>
+        :root {
+            --brand-cyan: #06B6D4;
+        }
+
         body {
             background-color: #000000;
+            overflow-x: hidden;
         }
 
         .glass {
@@ -46,7 +51,8 @@
         }
 
         .btn-hover:hover {
-            box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+            border-color: rgba(6, 182, 212, 0.4);
         }
 
         .ad-slot {
@@ -88,14 +94,36 @@
         }
 
         .logo-glow {
-            filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.4));
+            filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.4));
         }
 
         .logo-gradient {
-            background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+            background: linear-gradient(135deg, #06B6D4 0%, #22D3EE 100%);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        .modal-overlay {
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
         }
 
         /* Custom scrollbar */
@@ -113,7 +141,11 @@
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: rgba(16, 185, 129, 0.3);
+            background: rgba(6, 182, 212, 0.3);
+        }
+
+        .cyan-glow-text {
+            text-shadow: 0 0 15px rgba(6, 182, 212, 0.5);
         }
     </style>
 </head>
@@ -121,14 +153,13 @@
 <body class="min-h-screen flex flex-col p-4 md:p-8 max-w-5xl mx-auto">
 
     <!-- Header -->
-    <header
-        class="mb-4 animate-in fade-in slide-in-from-top duration-700 flex flex-col items-center md:items-start text-center md:text-left">
+    <header class="mb-4 flex flex-col items-center md:items-start text-center md:text-left">
         <a href="https://optimicrotools.com" title="Go to Home / Ir al Inicio"
-            class="flex items-center gap-3 mb-2 group hover:opacity-80 transition-opacity">
+            class="flex items-center gap-3 mb-2 group transition-all">
             <div
                 class="w-12 h-12 glass rounded-xl flex items-center justify-center logo-glow group-hover:scale-105 transition-transform duration-500">
                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
-                    stroke="#10b981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    stroke="#06B6D4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M4 7V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7" />
                     <path d="M9 10h6" />
                     <path d="M9 14h6" />
@@ -138,8 +169,9 @@
             </div>
             <h1 class="text-4xl font-bold tracking-tighter logo-gradient">PureText</h1>
         </a>
-        <p class="text-sm md:text-base text-white/40 font-light tracking-wide italic" data-i18n="header_subtitle">Limpia
-            tu texto de IA al instante.</p>
+        <p class="text-sm md:text-base text-white/40 font-light tracking-wide italic" data-i18n="header_subtitle">
+            Limpia tu texto de IA al instante.
+        </p>
     </header>
 
     <!-- Top Ad Slot -->
@@ -149,33 +181,33 @@
             data-i18n="ads_label">Ads / Anuncio</span></div>
 
     <!-- Main Content -->
-    <main class="flex-grow flex flex-col gap-6 w-full h-full mb-6">
-        <div class="relative flex-grow flex flex-col">
+    <main class="flex-grow flex flex-col gap-6 w-full mb-6">
+        <div class="relative flex-grow flex flex-col min-h-[300px]">
             <textarea id="mainText" placeholder="Pega aquí tu texto de ChatGPT, Claude..."
                 data-i18n-attr="placeholder:textarea_placeholder"
-                class="w-full flex-grow glass rounded-2xl p-6 text-lg md:text-xl font-light focus:outline-none focus:ring-1 focus:ring-brand-emerald/50 transition-all resize-none leading-relaxed"></textarea>
+                class="w-full flex-grow glass rounded-2xl p-6 text-lg md:text-xl font-light focus:outline-none focus:ring-1 focus:ring-brand-cyan/50 transition-all resize-none leading-relaxed"></textarea>
         </div>
 
         <!-- Action Grid -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
             <button onclick="cleanSpaces()"
                 class="glass btn-hover py-4 px-2 rounded-xl text-sm font-medium transition-all active:scale-95 flex flex-col items-center justify-center gap-1 group">
-                <span class="group-hover:text-brand-emerald transition-colors" data-i18n="btn_clean">Limpiar
+                <span class="group-hover:text-brand-cyan transition-colors" data-i18n="btn_clean">Limpiar
                     Espacios</span>
                 <span class="text-[10px] opacity-40 uppercase tracking-widest leading-none">Clean Spaces</span>
             </button>
             <button onclick="unAI()"
                 class="glass btn-hover py-4 px-2 rounded-xl text-sm font-medium transition-all active:scale-95 flex flex-col items-center justify-center gap-1 group">
-                <span class="group-hover:text-brand-emerald transition-colors" data-i18n="btn_unai">Quitar "IA"</span>
+                <span class="group-hover:text-brand-cyan transition-colors" data-i18n="btn_unai">Quitar "IA"</span>
                 <span class="text-[10px] opacity-40 uppercase tracking-widest leading-none">Un-AI</span>
             </button>
             <button onclick="toggleCase()"
                 class="glass btn-hover py-4 px-2 rounded-xl text-sm font-medium transition-all active:scale-95 flex flex-col items-center justify-center gap-1 group">
-                <span class="group-hover:text-brand-emerald transition-colors" data-i18n="btn_case">Mayús/Minús</span>
+                <span class="group-hover:text-brand-cyan transition-colors" data-i18n="btn_case">Mayús/Minús</span>
                 <span class="text-[10px] opacity-40 uppercase tracking-widest leading-none">Toggle Case</span>
             </button>
             <button onclick="copyToClipboard()"
-                class="bg-brand-emerald/10 border border-brand-emerald/20 hover:bg-brand-emerald/20 py-4 px-2 rounded-xl text-brand-emerald font-semibold transition-all active:scale-95 flex flex-col items-center justify-center gap-1"
+                class="bg-brand-cyan/10 border border-brand-cyan/20 hover:bg-brand-cyan/20 py-4 px-2 rounded-xl text-brand-cyan font-semibold transition-all active:scale-95 flex flex-col items-center justify-center gap-1"
                 id="copyBtn">
                 <span data-i18n="btn_copy">Copiar Texto</span>
                 <span class="text-[10px] opacity-60 uppercase tracking-widest leading-none">Copy Result</span>
@@ -190,25 +222,174 @@
             data-i18n="ads_label">Ads / Anuncio</span></div>
 
     <!-- Footer -->
-    <footer
-        class="mt-auto pt-4 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[11px] text-white/30 tracking-widest uppercase">
-        <div class="flex items-center gap-4">
-            <a href="https://optimicrotools.com" class="hover:text-white transition-colors">PureText &copy; 2024</a>
-            <span class="hidden md:inline">•</span>
-            <span data-i18n="footer_privacy">Ultra-Minimalista · 100% Privado</span>
-            <span class="hidden md:inline">•</span>
-            <span data-i18n="footer_tagline">Para Humanos e IAs</span>
-        </div>
+    <footer class="mt-auto pt-6 border-t border-white/5 flex flex-col gap-6">
+        <div
+            class="flex flex-wrap justify-center md:justify-between items-center gap-4 text-[10px] text-white/30 tracking-widest uppercase">
+            <div class="flex items-center gap-4 flex-wrap justify-center">
+                <a href="https://optimicrotools.com" class="hover:text-brand-cyan transition-colors">PureText &copy;
+                    2024</a>
+                <span>•</span>
+                <button onclick="openModal('supportModal')" class="hover:text-brand-cyan transition-colors"
+                    data-i18n="nav_support">Support Project</button>
+                <span>•</span>
+                <button onclick="openModal('contactModal')" class="hover:text-brand-cyan transition-colors"
+                    data-i18n="nav_contact">Contact</button>
+            </div>
 
-        <!-- Language Switcher -->
-        <div class="flex gap-3 bg-white/5 rounded-full px-3 py-1 border border-white/10">
-            <button onclick="setLanguage('es')" id="lang-es"
-                class="hover:text-brand-emerald transition-colors text-brand-emerald font-bold">ES</button>
-            <span class="opacity-20">/</span>
-            <button onclick="setLanguage('en')" id="lang-en"
-                class="hover:text-brand-emerald transition-colors">EN</button>
+            <div class="flex items-center gap-4 flex-wrap justify-center">
+                <button onclick="openModal('termsModal')" class="hover:text-white transition-colors"
+                    data-i18n="nav_terms">Terms</button>
+                <button onclick="openModal('privacyModal')" class="hover:text-white transition-colors"
+                    data-i18n="nav_privacy">Privacy</button>
+                <div class="flex gap-2 bg-white/5 rounded-full px-3 py-1 border border-white/10 ml-2">
+                    <button onclick="setLanguage('es')" id="lang-es"
+                        class="hover:text-brand-cyan transition-colors">ES</button>
+                    <span class="opacity-20">/</span>
+                    <button onclick="setLanguage('en')" id="lang-en"
+                        class="hover:text-brand-cyan transition-colors">EN</button>
+                </div>
+            </div>
         </div>
+        <p class="text-center text-[9px] text-white/20 tracking-[0.3em] font-light uppercase"
+            data-i18n="footer_tagline">Ultra-Minimalista · 100% Privado · Professional Grade</p>
     </footer>
+
+    <!-- MODALS -->
+    <!-- Support Modal -->
+    <div id="supportModal" class="modal-overlay fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div class="modal-content glass max-w-md w-full rounded-2xl p-8 relative">
+            <button onclick="closeModal('supportModal')"
+                class="absolute top-4 right-4 text-white/40 hover:text-white transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <h2 class="text-2xl font-bold mb-6 logo-gradient" data-i18n="modal_support_title">Support Project</h2>
+            <div class="space-y-4">
+                <a href="https://www.buymeacoffee.com/jota302" target="_blank"
+                    class="flex items-center justify-between p-4 glass rounded-xl hover:bg-white/5 transition-all group">
+                    <span class="font-medium">Buy Me a Coffee</span>
+                    <svg class="group-hover:text-brand-cyan" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+                        <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+                        <line x1="6" y1="1" x2="6" y2="4"></line>
+                        <line x1="10" y1="1" x2="10" y2="4"></line>
+                        <line x1="14" y1="1" x2="14" y2="4"></line>
+                    </svg>
+                </a>
+                <a href="https://paypal.me/jota302" target="_blank"
+                    class="flex items-center justify-between p-4 glass rounded-xl hover:bg-white/5 transition-all group">
+                    <span class="font-medium">PayPal</span>
+                    <svg class="group-hover:text-brand-cyan" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+                        <line x1="2" y1="10" x2="22" y2="10"></line>
+                    </svg>
+                </a>
+                <div class="p-4 glass rounded-xl space-y-3">
+                    <div class="flex items-center justify-between text-xs text-white/40">
+                        <span>CRYPTO (USDT TRC20)</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <code
+                            class="text-[10px] bg-black/40 p-2 rounded flex-grow overflow-hidden text-ellipsis">TE95Gtd8qTWnsEcqXxDEoQoKLNg2hMvVtV</code>
+                        <button onclick="copyCrypto()" id="cryptoBtn"
+                            class="p-2 bg-brand-cyan/20 text-brand-cyan rounded-lg hover:bg-brand-cyan/30 transition-all active:scale-90">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal-overlay fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div class="modal-content glass max-w-sm w-full rounded-2xl p-8 relative">
+            <button onclick="closeModal('contactModal')"
+                class="absolute top-4 right-4 text-white/40 hover:text-white transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <h2 class="text-2xl font-bold mb-6 logo-gradient" data-i18n="modal_contact_title">Contact</h2>
+            <div class="grid grid-cols-1 gap-4">
+                <a href="https://x.com/optimicrotools" target="_blank"
+                    class="flex items-center gap-4 p-4 glass rounded-xl hover:bg-white/5 transition-all group">
+                    <div
+                        class="w-10 h-10 rounded-lg bg-black/40 flex items-center justify-center group-hover:text-brand-cyan">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z">
+                            </path>
+                        </svg>
+                    </div>
+                    <span class="font-medium">X (Twitter)</span>
+                </a>
+                <a href="mailto:jota302@gmail.com"
+                    class="flex items-center gap-4 p-4 glass rounded-xl hover:bg-white/5 transition-all group">
+                    <div
+                        class="w-10 h-10 rounded-lg bg-black/40 flex items-center justify-center group-hover:text-brand-cyan">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                            </path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </div>
+                    <span class="font-medium">Email</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Legal Modals -->
+    <div id="termsModal" class="modal-overlay fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div
+            class="modal-content glass max-w-2xl w-full max-h-[80vh] overflow-hidden rounded-2xl flex flex-col relative">
+            <div class="p-8 pb-4">
+                <h2 class="text-2xl font-bold logo-gradient" data-i18n="nav_terms">Terms of Service</h2>
+            </div>
+            <div class="flex-grow overflow-y-auto p-8 pt-0 text-sm text-white/70 leading-relaxed font-light space-y-4"
+                data-i18n="legal_terms_content">
+                <!-- Content via i18n -->
+            </div>
+            <div class="p-8 border-t border-white/5 flex justify-end">
+                <button onclick="acceptLegal('termsModal')"
+                    class="bg-brand-cyan text-black font-bold py-2 px-8 rounded-lg hover:shadow-[0_0_15px_rgba(6,182,212,0.4)] transition-all">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="privacyModal" class="modal-overlay fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div
+            class="modal-content glass max-w-2xl w-full max-h-[80vh] overflow-hidden rounded-2xl flex flex-col relative">
+            <div class="p-8 pb-4">
+                <h2 class="text-2xl font-bold logo-gradient" data-i18n="nav_privacy">Privacy Policy</h2>
+            </div>
+            <div class="flex-grow overflow-y-auto p-8 pt-0 text-sm text-white/70 leading-relaxed font-light space-y-4"
+                data-i18n="legal_privacy_content">
+                <!-- Content via i18n -->
+            </div>
+            <div class="p-8 border-t border-white/5 flex justify-end">
+                <button onclick="acceptLegal('privacyModal')"
+                    class="bg-brand-cyan text-black font-bold py-2 px-8 rounded-lg hover:shadow-[0_0_15px_rgba(6,182,212,0.4)] transition-all">OK</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Logic -->
     <script>
@@ -227,9 +408,26 @@
                 btn_case: "Mayús/Minús",
                 btn_copy: "Copiar Texto",
                 btn_copy_success: "¡Copiado!",
-                footer_privacy: "Ultra-Minimalista · 100% Privado",
-                footer_tagline: "Para Humanos e IAs",
-                ads_label: "Ads / Anuncio"
+                ads_label: "Ads / Anuncio",
+                footer_tagline: "Ultra-Minimalista · 100% Privado · Professional Grade",
+                nav_support: "Apoyar Proyecto",
+                nav_contact: "Contacto",
+                nav_terms: "Términos de Servicio",
+                nav_privacy: "Política de Privacidad",
+                modal_support_title: "Apoyar el Proyecto",
+                modal_contact_title: "Contacto Oficial",
+                legal_terms_content: `
+                    <p>Al utilizar PureText, aceptas los siguientes términos:</p>
+                    <p>1. <strong>Uso Local:</strong> El procesamiento de texto se realiza íntegramente en tu navegador. Nosotros no almacenamos ni vemos tu contenido.</p>
+                    <p>2. <strong>Responsabilidad:</strong> Proporcionamos esta herramienta "tal cual" sin garantías de ningún tipo. No somos responsables por pérdidas de datos resultantes del uso de esta herramienta.</p>
+                    <p>3. <strong>Ecosistema:</strong> PureText forma parte de OptiMicroTools. El uso está sujeto a las normas generales de nuestro ecosistema.</p>
+                `,
+                legal_privacy_content: `
+                    <p>Tu privacidad es nuestra prioridad absoluta:</p>
+                    <p>1. <strong>Cero Datos:</strong> No recolectamos, procesamos ni almacenamos ningún texto ingresado en la herramienta.</p>
+                    <p>2. <strong>Cookies:</strong> Solo utilizamos localStorage para guardar tu preferencia de idioma y aceptación legal, garantizando una experiencia privada.</p>
+                    <p>3. <strong>Publicidad:</strong> Utilizamos Google AdSense para mantener el proyecto gratuito. Estos servicios pueden usar cookies para mostrar anuncios relevantes.</p>
+                `
             },
             en: {
                 head_title: "PureText | AI Text Cleaner",
@@ -241,39 +439,57 @@
                 btn_case: "Toggle Case",
                 btn_copy: "Copy Text",
                 btn_copy_success: "Copied!",
-                footer_privacy: "Ultra-Minimalist · 100% Private",
-                footer_tagline: "For Humans and AIs",
-                ads_label: "Ads / Advertisment"
+                ads_label: "Ads / Advertisement",
+                footer_tagline: "Ultra-Minimalist · 100% Private · Professional Grade",
+                nav_support: "Support Project",
+                nav_contact: "Contact",
+                nav_terms: "Terms of Service",
+                nav_privacy: "Privacy Policy",
+                modal_support_title: "Support Project",
+                modal_contact_title: "Official Contact",
+                legal_terms_content: `
+                    <p>By using PureText, you agree to the following terms:</p>
+                    <p>1. <strong>Local Use:</strong> Text processing happens entirely in your browser. We do not store or see your content.</p>
+                    <p>2. <strong>Liability:</strong> We provide this tool "as is" without any warranties. We are not responsible for any data loss resulting from its use.</p>
+                    <p>3. <strong>Ecosystem:</strong> PureText is part of OptiMicroTools. Usage is subject to our ecosystem's general rules.</p>
+                `,
+                legal_privacy_content: `
+                    <p>Your privacy is our top priority:</p>
+                    <p>1. <strong>Zero Data:</strong> We do not collect, process, or store any text entered into the tool.</p>
+                    <p>2. <strong>Cookies:</strong> We only use localStorage to save your language preference and legal acceptance, ensuring a private experience.</p>
+                    <p>3. <strong>Advertising:</strong> We use Google AdSense to keep the project free. These services may use cookies to show relevant ads.</p>
+                `
             }
         };
 
         function setLanguage(lang) {
-            localStorage.setItem('selected_language', lang);
-            document.documentElement.lang = lang;
+            try {
+                localStorage.setItem('selected_language', lang);
+                document.documentElement.lang = lang;
 
-            // Update translations
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (translations[lang] && translations[lang][key]) {
-                    el.textContent = translations[lang][key];
-                }
-            });
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    if (translations[lang] && translations[lang][key]) {
+                        el.innerHTML = translations[lang][key];
+                    }
+                });
 
-            // Update attributes (placeholders, meta descriptions)
-            document.querySelectorAll('[data-i18n-attr]').forEach(el => {
-                const attrData = el.getAttribute('data-i18n-attr').split(':');
-                const attrName = attrData[0];
-                const key = attrData[1];
-                if (translations[lang] && translations[lang][key]) {
-                    el.setAttribute(attrName, translations[lang][key]);
-                }
-            });
+                document.querySelectorAll('[data-i18n-attr]').forEach(el => {
+                    const attrData = el.getAttribute('data-i18n-attr').split(':');
+                    const attrName = attrData[0];
+                    const key = attrData[1];
+                    if (translations[lang] && translations[lang][key]) {
+                        el.setAttribute(attrName, translations[lang][key]);
+                    }
+                });
 
-            // Update selector UI
-            document.getElementById('lang-es').classList.toggle('text-brand-emerald', lang === 'es');
-            document.getElementById('lang-es').classList.toggle('font-bold', lang === 'es');
-            document.getElementById('lang-en').classList.toggle('text-brand-emerald', lang === 'en');
-            document.getElementById('lang-en').classList.toggle('font-bold', lang === 'en');
+                document.getElementById('lang-es').classList.toggle('text-brand-cyan', lang === 'es');
+                document.getElementById('lang-es').classList.toggle('font-bold', lang === 'es');
+                document.getElementById('lang-en').classList.toggle('text-brand-cyan', lang === 'en');
+                document.getElementById('lang-en').classList.toggle('font-bold', lang === 'en');
+            } catch (e) {
+                console.error("i18n Error:", e);
+            }
         }
 
         function initLanguage() {
@@ -283,76 +499,102 @@
             setLanguage(defaultLang);
         }
 
+        // TOOL LOGIC
         function cleanSpaces() {
-            if (!textarea.value) return;
-            // Remove extra spaces and newlines, keep single ones
-            let text = textarea.value.replace(/\r\n/g, "\n");
-            text = text.replace(/[ \t]+/g, ' '); // Normalize spaces/tabs
-            text = text.replace(/\n\s*\n/g, '\n\n'); // Allow double newlines for paragraphs
-            textarea.value = text.trim();
+            try {
+                if (!textarea.value) return;
+                let text = textarea.value.replace(/\r\n/g, "\n");
+                text = text.replace(/[ \t]+/g, ' ');
+                text = text.replace(/\n\s*\n/g, '\n\n');
+                textarea.value = text.trim();
+            } catch (e) { console.error("Clean error:", e); }
         }
 
         function unAI() {
-            if (!textarea.value) return;
-            let text = textarea.value;
-
-            // Phrases to remove (Spanish-ish defaults, could be expanded for EN)
-            const patterns = [
-                /^Aquí tienes:?/gi,
-                /^Entendido, aquí tienes:?/gi,
-                /^Claro, aquí tienes:?/gi,
-                /^Here is:?/gi,
-                /^Sure, here is:?/gi,
-                /^ChatGPT:?/gi,
-                /^Claude:?/gi,
-                /\*{2}/g, // Markdown bold
-                /^\s+/gm  // Leading spaces per line
-            ];
-
-            patterns.forEach(p => text = text.replace(p, ''));
-            textarea.value = text.trim();
+            try {
+                if (!textarea.value) return;
+                let text = textarea.value;
+                const patterns = [
+                    /^Aquí tienes:?/gi, /^Entendido, aquí tienes:?/gi, /^Claro, aquí tienes:?/gi,
+                    /^Here is:?/gi, /^Sure, here is:?/gi, /^As an AI language model,?/gi,
+                    /^ChatGPT:?/gi, /^Claude:?/gi, /\*{2}/g, /^\s+/gm
+                ];
+                patterns.forEach(p => text = text.replace(p, ''));
+                textarea.value = text.trim();
+            } catch (e) { console.error("UnAI error:", e); }
         }
 
-        let caseState = 0; // 0: normal, 1: upper, 2: lower
+        let caseState = 0;
         function toggleCase() {
-            if (!textarea.value) return;
-            caseState = (caseState + 1) % 3;
-
-            if (caseState === 1) {
-                textarea.value = textarea.value.toUpperCase();
-            } else if (caseState === 2) {
-                textarea.value = textarea.value.toLowerCase();
-            } else {
-                // To restore "original" is hard without storing
-            }
+            try {
+                if (!textarea.value) return;
+                caseState = (caseState + 1) % 3;
+                if (caseState === 1) textarea.value = textarea.value.toUpperCase();
+                else if (caseState === 2) textarea.value = textarea.value.toLowerCase();
+            } catch (e) { console.error("ToggleCase error:", e); }
         }
 
         async function copyToClipboard() {
             if (!textarea.value) return;
-            const currentLang = document.documentElement.lang || 'es';
             try {
                 await navigator.clipboard.writeText(textarea.value);
-                const originalText = copyBtn.querySelector('[data-i18n]').textContent;
-                const successText = translations[currentLang].btn_copy_success;
-
-                copyBtn.querySelector('[data-i18n]').textContent = successText;
-                copyBtn.classList.replace('text-brand-emerald', 'text-white');
-                copyBtn.classList.add('bg-brand-emerald');
+                const currentLang = document.documentElement.lang || 'es';
+                const originalText = copyBtn.querySelector('[data-i18n]').innerHTML;
+                copyBtn.querySelector('[data-i18n]').innerHTML = translations[currentLang].btn_copy_success;
+                copyBtn.classList.replace('text-brand-cyan', 'text-black');
+                copyBtn.classList.replace('bg-brand-cyan/10', 'bg-brand-cyan');
 
                 setTimeout(() => {
-                    copyBtn.querySelector('[data-i18n]').textContent = originalText;
-                    copyBtn.classList.replace('text-white', 'text-brand-emerald');
-                    copyBtn.classList.remove('bg-brand-emerald');
+                    copyBtn.querySelector('[data-i18n]').innerHTML = originalText;
+                    copyBtn.classList.replace('text-black', 'text-brand-cyan');
+                    copyBtn.classList.replace('bg-brand-cyan', 'bg-brand-cyan/10');
                 }, 2000);
-            } catch (err) {
-                console.error('Error al copiar: ', err);
-            }
+            } catch (err) { console.error('Copy Error:', err); }
         }
 
-        // Auto-focus and init i18n
+        // MODAL SYSTEM
+        function openModal(id) {
+            document.getElementById(id).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function acceptLegal(id) {
+            localStorage.setItem(`accepted_${id}`, 'true');
+            closeModal(id);
+        }
+
+        async function copyCrypto() {
+            const btn = document.getElementById('cryptoBtn');
+            try {
+                await navigator.clipboard.writeText('TE95Gtd8qTWnsEcqXxDEoQoKLNg2hMvVtV');
+                btn.classList.add('bg-white', 'text-black');
+                setTimeout(() => btn.classList.remove('bg-white', 'text-black'), 1000);
+            } catch (e) { console.error(e); }
+        }
+
+        // Close on escape or outside click
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal-overlay').forEach(m => closeModal(m.id));
+            }
+        });
+
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) closeModal(overlay.id);
+            });
+        });
+
         window.onload = () => {
             initLanguage();
             textarea.focus();
+            // Optional: Auto-show terms if not accepted
+            // if (!localStorage.getItem('accepted_termsModal')) openModal('termsModal');
         };
     </script>
 </body>
