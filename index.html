@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es" class="bg-black text-white">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2310b981' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 7V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7'/%3E%3Cpath d='M9 10h6'/%3E%3Cpath d='M9 14h6'/%3E%3Cpath d='M9 18h3'/%3E%3Cpath d='M4 7l8-3 8 3'/%3E%3C/svg%3E">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8167884438770174"
+        crossorigin="anonymous"></script>
+    <title data-i18n="head_title">PureText | AI Text Cleaner</title>
+    <meta name="description"
+        content="Una herramienta minimalista para limpiar y formatear texto de IA de forma rápida y eficiente."
+        data-i18n-attr="description:head_description">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            black: '#000000',
+                            emerald: '#10b981',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #000000;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-hover:hover {
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+        }
+
+        .ad-slot {
+            margin: 2rem auto;
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.02);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .ad-desktop {
+            width: 728px;
+            height: 90px;
+        }
+
+        .ad-mobile {
+            width: 320px;
+            height: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .ad-desktop {
+                display: none;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .ad-mobile {
+                display: none;
+            }
+        }
+
+        textarea::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .logo-glow {
+            filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.4));
+        }
+
+        .logo-gradient {
+            background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(16, 185, 129, 0.3);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col p-4 md:p-8 max-w-5xl mx-auto">
+
+    <!-- Header -->
+    <header
+        class="mb-4 animate-in fade-in slide-in-from-top duration-700 flex flex-col items-center md:items-start text-center md:text-left">
+        <div class="flex items-center gap-3 mb-2 group cursor-default">
+            <div
+                class="w-12 h-12 glass rounded-xl flex items-center justify-center logo-glow group-hover:scale-105 transition-transform duration-500">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                    stroke="#10b981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 7V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7" />
+                    <path d="M9 10h6" />
+                    <path d="M9 14h6" />
+                    <path d="M9 18h3" />
+                    <path d="M4 7l8-3 8 3" />
+                </svg>
+            </div>
+            <h1 class="text-4xl font-bold tracking-tighter logo-gradient">PureText</h1>
+        </div>
+        <p class="text-sm md:text-base text-white/40 font-light tracking-wide italic" data-i18n="header_subtitle">Limpia
+            tu texto de IA al instante.</p>
+    </header>
+
+    <!-- Top Ad Slot -->
+    <div class="ad-slot ad-desktop"><span class="text-[10px] text-white/20 uppercase tracking-[0.2em]"
+            data-i18n="ads_label">Ads / Anuncio</span></div>
+    <div class="ad-slot ad-mobile"><span class="text-[10px] text-white/20 uppercase tracking-[0.2em]"
+            data-i18n="ads_label">Ads / Anuncio</span></div>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex flex-col gap-6 w-full h-full mb-6">
+        <div class="relative flex-grow flex flex-col">
+            <textarea id="mainText" placeholder="Pega aquí tu texto de ChatGPT, Claude..."
+                data-i18n-attr="placeholder:textarea_placeholder"
+                class="w-full flex-grow glass rounded-2xl p-6 text-lg md:text-xl font-light focus:outline-none focus:ring-1 focus:ring-brand-emerald/50 transition-all resize-none leading-relaxed"></textarea>
+        </div>
+
+        <!-- Action Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+            <button onclick="cleanSpaces()"
+                class="glass btn-hover py-4 px-2 rounded-xl text-sm font-medium transition-all active:scale-95 flex flex-col items-center justify-center gap-1 group">
+                <span class="group-hover:text-brand-emerald transition-colors" data-i18n="btn_clean">Limpiar
+                    Espacios</span>
+                <span class="text-[10px] opacity-40 uppercase tracking-widest leading-none">Clean Spaces</span>
+            </button>
+            <button onclick="unAI()"
+                class="glass btn-hover py-4 px-2 rounded-xl text-sm font-medium transition-all active:scale-95 flex flex-col items-center justify-center gap-1 group">
+                <span class="group-hover:text-brand-emerald transition-colors" data-i18n="btn_unai">Quitar "IA"</span>
+                <span class="text-[10px] opacity-40 uppercase tracking-widest leading-none">Un-AI</span>
+            </button>
+            <button onclick="toggleCase()"
+                class="glass btn-hover py-4 px-2 rounded-xl text-sm font-medium transition-all active:scale-95 flex flex-col items-center justify-center gap-1 group">
+                <span class="group-hover:text-brand-emerald transition-colors" data-i18n="btn_case">Mayús/Minús</span>
+                <span class="text-[10px] opacity-40 uppercase tracking-widest leading-none">Toggle Case</span>
+            </button>
+            <button onclick="copyToClipboard()"
+                class="bg-brand-emerald/10 border border-brand-emerald/20 hover:bg-brand-emerald/20 py-4 px-2 rounded-xl text-brand-emerald font-semibold transition-all active:scale-95 flex flex-col items-center justify-center gap-1"
+                id="copyBtn">
+                <span data-i18n="btn_copy">Copiar Texto</span>
+                <span class="text-[10px] opacity-60 uppercase tracking-widest leading-none">Copy Result</span>
+            </button>
+        </div>
+    </main>
+
+    <!-- Bottom Ad Slot -->
+    <div class="ad-slot ad-desktop"><span class="text-[10px] text-white/20 uppercase tracking-[0.2em]"
+            data-i18n="ads_label">Ads / Anuncio</span></div>
+    <div class="ad-slot ad-mobile"><span class="text-[10px] text-white/20 uppercase tracking-[0.2em]"
+            data-i18n="ads_label">Ads / Anuncio</span></div>
+
+    <!-- Footer -->
+    <footer
+        class="mt-auto pt-4 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[11px] text-white/30 tracking-widest uppercase">
+        <div class="flex items-center gap-4">
+            <span>PureText &copy; 2024</span>
+            <span class="hidden md:inline">•</span>
+            <span data-i18n="footer_privacy">Ultra-Minimalista · 100% Privado</span>
+            <span class="hidden md:inline">•</span>
+            <span data-i18n="footer_tagline">Para Humanos e IAs</span>
+        </div>
+
+        <!-- Language Switcher -->
+        <div class="flex gap-3 bg-white/5 rounded-full px-3 py-1 border border-white/10">
+            <button onclick="setLanguage('es')" id="lang-es"
+                class="hover:text-brand-emerald transition-colors text-brand-emerald font-bold">ES</button>
+            <span class="opacity-20">/</span>
+            <button onclick="setLanguage('en')" id="lang-en"
+                class="hover:text-brand-emerald transition-colors">EN</button>
+        </div>
+    </footer>
+
+    <!-- Logic -->
+    <script>
+        const textarea = document.getElementById('mainText');
+        const copyBtn = document.getElementById('copyBtn');
+
+        // i18n Logic
+        const translations = {
+            es: {
+                head_title: "PureText | Limpiador de Texto IA",
+                head_description: "Una herramienta minimalista para limpiar y formatear texto de IA de forma rápida y eficiente.",
+                header_subtitle: "Limpia tu texto de IA al instante.",
+                textarea_placeholder: "Pega aquí tu texto de ChatGPT, Claude...",
+                btn_clean: "Limpiar Espacios",
+                btn_unai: "Quitar \"IA\"",
+                btn_case: "Mayús/Minús",
+                btn_copy: "Copiar Texto",
+                btn_copy_success: "¡Copiado!",
+                footer_privacy: "Ultra-Minimalista · 100% Privado",
+                footer_tagline: "Para Humanos e IAs",
+                ads_label: "Ads / Anuncio"
+            },
+            en: {
+                head_title: "PureText | AI Text Cleaner",
+                head_description: "A minimalist tool to clean and format AI text quickly and efficiently.",
+                header_subtitle: "Clean your AI text instantly.",
+                textarea_placeholder: "Paste your text from ChatGPT, Claude here...",
+                btn_clean: "Clean Spaces",
+                btn_unai: "Un-AI",
+                btn_case: "Toggle Case",
+                btn_copy: "Copy Text",
+                btn_copy_success: "Copied!",
+                footer_privacy: "Ultra-Minimalist · 100% Private",
+                footer_tagline: "For Humans and AIs",
+                ads_label: "Ads / Advertisment"
+            }
+        };
+
+        function setLanguage(lang) {
+            localStorage.setItem('selected_language', lang);
+            document.documentElement.lang = lang;
+
+            // Update translations
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+
+            // Update attributes (placeholders, meta descriptions)
+            document.querySelectorAll('[data-i18n-attr]').forEach(el => {
+                const attrData = el.getAttribute('data-i18n-attr').split(':');
+                const attrName = attrData[0];
+                const key = attrData[1];
+                if (translations[lang] && translations[lang][key]) {
+                    el.setAttribute(attrName, translations[lang][key]);
+                }
+            });
+
+            // Update selector UI
+            document.getElementById('lang-es').classList.toggle('text-brand-emerald', lang === 'es');
+            document.getElementById('lang-es').classList.toggle('font-bold', lang === 'es');
+            document.getElementById('lang-en').classList.toggle('text-brand-emerald', lang === 'en');
+            document.getElementById('lang-en').classList.toggle('font-bold', lang === 'en');
+        }
+
+        function initLanguage() {
+            const savedLang = localStorage.getItem('selected_language');
+            const browserLang = navigator.language.split('-')[0];
+            const defaultLang = (savedLang || (translations[browserLang] ? browserLang : 'es'));
+            setLanguage(defaultLang);
+        }
+
+        function cleanSpaces() {
+            if (!textarea.value) return;
+            // Remove extra spaces and newlines, keep single ones
+            let text = textarea.value.replace(/\r\n/g, "\n");
+            text = text.replace(/[ \t]+/g, ' '); // Normalize spaces/tabs
+            text = text.replace(/\n\s*\n/g, '\n\n'); // Allow double newlines for paragraphs
+            textarea.value = text.trim();
+        }
+
+        function unAI() {
+            if (!textarea.value) return;
+            let text = textarea.value;
+
+            // Phrases to remove (Spanish-ish defaults, could be expanded for EN)
+            const patterns = [
+                /^Aquí tienes:?/gi,
+                /^Entendido, aquí tienes:?/gi,
+                /^Claro, aquí tienes:?/gi,
+                /^Here is:?/gi,
+                /^Sure, here is:?/gi,
+                /^ChatGPT:?/gi,
+                /^Claude:?/gi,
+                /\*{2}/g, // Markdown bold
+                /^\s+/gm  // Leading spaces per line
+            ];
+
+            patterns.forEach(p => text = text.replace(p, ''));
+            textarea.value = text.trim();
+        }
+
+        let caseState = 0; // 0: normal, 1: upper, 2: lower
+        function toggleCase() {
+            if (!textarea.value) return;
+            caseState = (caseState + 1) % 3;
+
+            if (caseState === 1) {
+                textarea.value = textarea.value.toUpperCase();
+            } else if (caseState === 2) {
+                textarea.value = textarea.value.toLowerCase();
+            } else {
+                // To restore "original" is hard without storing
+            }
+        }
+
+        async function copyToClipboard() {
+            if (!textarea.value) return;
+            const currentLang = document.documentElement.lang || 'es';
+            try {
+                await navigator.clipboard.writeText(textarea.value);
+                const originalText = copyBtn.querySelector('[data-i18n]').textContent;
+                const successText = translations[currentLang].btn_copy_success;
+
+                copyBtn.querySelector('[data-i18n]').textContent = successText;
+                copyBtn.classList.replace('text-brand-emerald', 'text-white');
+                copyBtn.classList.add('bg-brand-emerald');
+
+                setTimeout(() => {
+                    copyBtn.querySelector('[data-i18n]').textContent = originalText;
+                    copyBtn.classList.replace('text-white', 'text-brand-emerald');
+                    copyBtn.classList.remove('bg-brand-emerald');
+                }, 2000);
+            } catch (err) {
+                console.error('Error al copiar: ', err);
+            }
+        }
+
+        // Auto-focus and init i18n
+        window.onload = () => {
+            initLanguage();
+            textarea.focus();
+        };
+    </script>
+</body>
+
+</html>
