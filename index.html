@@ -65,6 +65,7 @@
             border-radius: 12px;
             overflow: hidden;
             transition: all 0.3s ease;
+            min-height: 90px;
         }
 
         .ad-desktop {
@@ -159,7 +160,8 @@
             <div
                 class="w-12 h-12 glass rounded-xl flex items-center justify-center logo-glow group-hover:scale-105 transition-transform duration-500">
                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
-                    stroke="#06B6D4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    stroke="#06B6D4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                    class="group-hover:rotate-[360deg] transition-transform duration-1000">
                     <path d="M4 7V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7" />
                     <path d="M9 10h6" />
                     <path d="M9 14h6" />
@@ -214,6 +216,65 @@
             </button>
         </div>
     </main>
+
+    <!-- Technical Insights Section -->
+    <section class="mb-8 overflow-hidden rounded-2xl glass">
+        <div class="p-8">
+            <h2 class="mb-4 text-2xl font-bold cyan-glow-text text-[#06B6D4]" data-i18n="tech_title">Technical Insights:
+                How PureText Works</h2>
+            <div class="space-y-6 text-sm leading-relaxed font-light text-white/70">
+                <div data-i18n="tech_description">
+                    PureText is a high-performance utility designed to strip away AI-generated formatting artifacts and
+                    normalize text for professional use. By leveraging advanced regex patterns, it eliminates common AI
+                    intro/outro phrases and standardizes white spaces, ensuring your content is ready for any
+                    destination.
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="mb-3 text-sm font-bold uppercase tracking-widest text-[#06B6D4]"
+                            data-i18n="tech_guide_title">Quick Usage Guide</h3>
+                        <ul class="space-y-2 list-none" data-i18n="tech_guide_list">
+                            <li class="flex items-start gap-3"><span class="text-[#06B6D4]">01.</span> Paste your raw AI
+                                text into the main editor.</li>
+                            <li class="flex items-start gap-3"><span class="text-[#06B6D4]">02.</span> Use "Clean
+                                Spaces" or "Un-AI" to process the content.</li>
+                            <li class="flex items-start gap-3"><span class="text-[#06B6D4]">03.</span> Copy the
+                                sterilized result with one click.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="mb-3 text-sm font-bold uppercase tracking-widest text-[#06B6D4]"
+                            data-i18n="tech_security_title">Security & Privacy</h3>
+                        <p data-i18n="tech_security_desc">
+                            PureText operates exclusively through <strong>Client-Side Processing (JavaScript)</strong>.
+                            Your data never leaves your browser; no text is transmitted to our servers or stored in any
+                            database, providing 100% airtight privacy.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="pt-6 border-t border-white/5">
+                    <h3 class="mb-4 text-sm font-bold uppercase tracking-widest text-[#06B6D4]"
+                        data-i18n="tech_faq_title">Technical FAQ</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <p class="font-bold text-white/90 mb-1" data-i18n="tech_faq_q1">Does it support WASM
+                                acceleration?</p>
+                            <p data-i18n="tech_faq_a1">Currently, PureText uses optimized JS engines, but WASM
+                                integration is planned for handling extremely large text datasets.</p>
+                        </div>
+                        <div>
+                            <p class="font-bold text-white/90 mb-1" data-i18n="tech_faq_q2">Why remove "AI" patterns?
+                            </p>
+                            <p data-i18n="tech_faq_a2">AI models often inject predictable conversational structures that
+                                can clutter technical documentation or clean copy.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Bottom Ad Slot -->
     <div class="ad-slot ad-desktop"><span class="text-[10px] text-white/20 uppercase tracking-[0.2em]"
@@ -427,7 +488,22 @@
                     <p>1. <strong>Cero Datos:</strong> No recolectamos, procesamos ni almacenamos ningún texto ingresado en la herramienta.</p>
                     <p>2. <strong>Cookies:</strong> Solo utilizamos localStorage para guardar tu preferencia de idioma y aceptación legal, garantizando una experiencia privada.</p>
                     <p>3. <strong>Publicidad:</strong> Utilizamos Google AdSense para mantener el proyecto gratuito. Estos servicios pueden usar cookies para mostrar anuncios relevantes.</p>
-                `
+                `,
+                tech_title: "Technical Insights: Cómo Funciona PureText",
+                tech_description: "PureText es una utilidad de alto rendimiento diseñada para eliminar artefactos de formato generados por IA y normalizar texto para uso profesional. Mediante el uso de patrones regex avanzados, elimina frases comunes de introducción/cierre de IA y estandariza los espacios en blanco, asegurando que su contenido esté listo para cualquier destino.",
+                tech_guide_title: "Guía de Uso Rápido",
+                tech_guide_list: `
+                    <li class="flex items-start gap-3"><span class="text-[#06B6D4]">01.</span> Pegue su texto de IA en el editor principal.</li>
+                    <li class="flex items-start gap-3"><span class="text-[#06B6D4]">02.</span> Use "Limpiar Espacios" o "Quitar IA" para procesar el contenido.</li>
+                    <li class="flex items-start gap-3"><span class="text-[#06B6D4]">03.</span> Copie el resultado esterilizado con un solo clic.</li>
+                `,
+                tech_security_title: "Seguridad y Privacidad",
+                tech_security_desc: "PureText funciona exclusivamente mediante <strong>Procesamiento del Lado del Cliente (JavaScript)</strong>. Sus datos nunca salen de su navegador; no se transmite texto a nuestros servidores ni se almacena en ninguna base de datos, proporcionando una privacidad 100% hermética.",
+                tech_faq_title: "Preguntas Frecuentes Técnicas",
+                tech_faq_q1: "¿Soporta aceleración WASM?",
+                tech_faq_a1: "Actualmente, PureText utiliza motores JS optimizados, pero la integración de WASM está planeada para manejar conjuntos de datos de texto extremadamente grandes.",
+                tech_faq_q2: "¿Por qué eliminar patrones de IA?",
+                tech_faq_a2: "Los modelos de IA a menudo inyectan estructuras conversacionales predecibles que pueden saturar la documentación técnica o el texto final.",
             },
             en: {
                 head_title: "PureText | AI Text Cleaner",
@@ -458,7 +534,22 @@
                     <p>1. <strong>Zero Data:</strong> We do not collect, process, or store any text entered into the tool.</p>
                     <p>2. <strong>Cookies:</strong> We only use localStorage to save your language preference and legal acceptance, ensuring a private experience.</p>
                     <p>3. <strong>Advertising:</strong> We use Google AdSense to keep the project free. These services may use cookies to show relevant ads.</p>
-                `
+                `,
+                tech_title: "Technical Insights: How PureText Works",
+                tech_description: "PureText is a high-performance utility designed to strip away AI-generated formatting artifacts and normalize text for professional use. By leveraging advanced regex patterns, it eliminates common AI intro/outro phrases and standardizes white spaces, ensuring your content is ready for any destination.",
+                tech_guide_title: "Quick Usage Guide",
+                tech_guide_list: `
+                    <li class="flex items-start gap-3"><span class="text-[#06B6D4]">01.</span> Paste your raw AI text into the main editor.</li>
+                    <li class="flex items-start gap-3"><span class="text-[#06B6D4]">02.</span> Use "Clean Spaces" or "Un-AI" to process the content.</li>
+                    <li class="flex items-start gap-3"><span class="text-[#06B6D4]">03.</span> Copy the sterilized result with one click.</li>
+                `,
+                tech_security_title: "Security & Privacy",
+                tech_security_desc: "PureText operates exclusively through <strong>Client-Side Processing (JavaScript)</strong>. Your data never leaves your browser; no text is transmitted to our servers or stored in any database, providing 100% airtight privacy.",
+                tech_faq_title: "Technical FAQ",
+                tech_faq_q1: "Does it support WASM acceleration?",
+                tech_faq_a1: "Currently, PureText uses optimized JS engines, but WASM integration is planned for handling extremely large text datasets.",
+                tech_faq_q2: "Why remove 'AI' patterns?",
+                tech_faq_a2: "AI models often inject predictable conversational structures that can clutter technical documentation or clean copy.",
             }
         };
 
