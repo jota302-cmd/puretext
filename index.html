@@ -685,9 +685,14 @@
         }
 
         function initLanguage() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const urlLang = urlParams.get('lang');
+            const validUrlLang = (urlLang === 'es' || urlLang === 'en') ? urlLang : null;
+
             const savedLang = localStorage.getItem('lang');
             const browserLang = navigator.language.startsWith('es') ? 'es' : 'en';
-            const defaultLang = savedLang || browserLang;
+            
+            const defaultLang = validUrlLang || savedLang || browserLang;
             setLanguage(defaultLang);
         }
 
