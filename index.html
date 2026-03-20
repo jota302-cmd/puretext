@@ -685,8 +685,8 @@
 
         function initLanguage() {
             const savedLang = localStorage.getItem('lang');
-            const browserLang = navigator.language.split('-')[0];
-            const defaultLang = (savedLang || (translations[browserLang] ? browserLang : 'es'));
+            const browserLang = navigator.language.startsWith('es') ? 'es' : 'en';
+            const defaultLang = savedLang || browserLang;
             setLanguage(defaultLang);
         }
 
